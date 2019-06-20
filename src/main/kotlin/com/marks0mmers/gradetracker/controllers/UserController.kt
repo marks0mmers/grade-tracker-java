@@ -4,6 +4,7 @@ import com.marks0mmers.gradetracker.config.PBKDF2Encoder
 import com.marks0mmers.gradetracker.dto.AuthRequest
 import com.marks0mmers.gradetracker.dto.AuthResponse
 import com.marks0mmers.gradetracker.dto.CreateUserDto
+import com.marks0mmers.gradetracker.dto.UserDto
 import com.marks0mmers.gradetracker.services.UserService
 import com.marks0mmers.gradetracker.util.JWTUtil
 import org.springframework.beans.factory.annotation.Autowired
@@ -34,11 +35,13 @@ class UserController @Autowired constructor(
     @PostMapping
     fun createUser(@RequestBody user: CreateUserDto) = userService
             .createUser(user)
+            .map { UserDto(it) }
 
     @GetMapping("{id}")
     @PreAuthorize("hasRole('USER')")
     fun getUserById(@PathVariable("id") userId: String) = userService
             .getUserById(userId)
+            .map { UserDto(it) }
             .map { ResponseEntity.ok(it) }
             .defaultIfEmpty(ResponseEntity.notFound().build())
 }

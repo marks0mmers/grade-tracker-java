@@ -1,5 +1,6 @@
 package com.marks0mmers.gradetracker.persistent
 
+import com.marks0mmers.gradetracker.dto.CourseDto
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import javax.validation.constraints.Max
@@ -24,4 +25,13 @@ data class Course(
         val creditHours: Int,
 
         val userId: String
-)
+) {
+        constructor(course: CourseDto): this(
+                course.id,
+                course.title,
+                course.description,
+                course.section,
+                course.creditHours,
+                course.userId
+        )
+}

@@ -1,6 +1,7 @@
 package com.marks0mmers.gradetracker.dto
 
 import com.marks0mmers.gradetracker.constants.Role
+import com.marks0mmers.gradetracker.persistent.User
 
 data class UserDto(
         val id: String?,
@@ -10,7 +11,17 @@ data class UserDto(
         val lastName: String,
         var enabled: Boolean,
         var roles: List<Role>
-)
+) {
+    constructor(user: User): this(
+            user.id,
+            user.username,
+            user.password,
+            user.firstName,
+            user.lastName,
+            user.enabled,
+            user.roles
+    )
+}
 
 data class CreateUserDto(
         val username: String,

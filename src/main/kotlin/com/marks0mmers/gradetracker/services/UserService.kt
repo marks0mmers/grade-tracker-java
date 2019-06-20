@@ -8,12 +8,15 @@ import com.marks0mmers.gradetracker.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
+import java.security.Principal
 
 @Service
 class UserService @Autowired constructor(
         private val userRepository: UserRepository,
         private val passwordEncoder: PBKDF2Encoder
 ) {
+    fun currentUser(p: Principal) = findByUsername(p.name)
+
     fun findByUsername(username: String): Mono<User?> = userRepository
             .findAll()
             .filter { it.username == username }
