@@ -8,7 +8,7 @@ data class CourseDto(
         val description: String,
         val section: Int,
         val creditHours: Int,
-        val userId: String
+        var userId: String
 ) {
     constructor(course: Course): this(
             course.id,
