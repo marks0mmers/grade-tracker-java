@@ -6,16 +6,15 @@ import com.marks0mmers.gradetracker.persistent.User
 data class UserDto(
         val id: String?,
         val username: String,
-        val password: String,
         val firstName: String,
         val lastName: String,
         var enabled: Boolean,
-        var roles: List<Role>
-) {
+        var roles: List<Role>,
+        var token: String? = null
+        ) {
     constructor(user: User): this(
             user.id,
             user.username,
-            user.password,
             user.firstName,
             user.lastName,
             user.enabled,

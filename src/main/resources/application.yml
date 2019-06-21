@@ -1,3 +1,7 @@
+spring:
+  data:
+    mongodb:
+      database: grade-tracker-java
 springbootwebfluxjjwt:
   password:
     encoder:

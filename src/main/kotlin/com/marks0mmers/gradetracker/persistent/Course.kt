@@ -26,12 +26,12 @@ data class Course(
 
         val userId: String
 ) {
-        constructor(course: CourseDto): this(
+        constructor(course: CourseDto, userId: String): this(
                 course.id,
                 course.title,
                 course.description,
                 course.section,
                 course.creditHours,
-                course.userId
+                userId
         )
 }
