@@ -17,10 +17,14 @@ class UserService @Autowired constructor(
 ) {
     fun currentUser(p: Principal) = findByUsername(p.name)
 
-    fun findByUsername(username: String): Mono<User?> = userRepository
+    fun login(username: String, password: String): Mono<User> = findByUsername(username)
+            .filter { it != null && passwordEncoder.matches(password, it.password) }
+
+
+    fun findByUsername(username: String): Mono<User> = userRepository
             .findAll()
             .filter { it.username == username }
-            .last()
+            .next()
 
     fun createUser(user: CreateUserDto) = userRepository
             .save(User(
