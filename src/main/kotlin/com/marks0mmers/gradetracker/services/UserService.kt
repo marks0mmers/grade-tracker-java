@@ -15,11 +15,8 @@ class UserService @Autowired constructor(
         private val userRepository: UserRepository,
         private val passwordEncoder: PBKDF2Encoder
 ) {
-    fun currentUser(p: Principal) = findByUsername(p.name)
-
     fun login(username: String, password: String): Mono<User> = findByUsername(username)
             .filter { it != null && passwordEncoder.matches(password, it.password) }
-
 
     fun findByUsername(username: String): Mono<User> = userRepository
             .findAll()
