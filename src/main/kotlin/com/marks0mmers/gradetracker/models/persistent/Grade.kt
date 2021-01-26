@@ -13,10 +13,10 @@ data class Grade(
     val id: String?,
 
     @NotNull
-    val name: String,
+    var name: String,
 
     @PositiveOrZero @Max(100)
-    val grade: Double,
+    var grade: Double,
 
     @NotNull
     val gradeCategoryId: String

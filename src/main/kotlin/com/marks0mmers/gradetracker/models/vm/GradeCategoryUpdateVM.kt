@@ -2,7 +2,7 @@ package com.marks0mmers.gradetracker.models.vm
 
 import com.marks0mmers.gradetracker.models.dto.GradeDto
 
-data class UpdateGradeCategoryVM(
+data class GradeCategoryUpdateVM(
     val title: String,
     val percentage: Double,
     val numberOfGrades: Int,

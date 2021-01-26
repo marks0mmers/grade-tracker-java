@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
 	id("org.springframework.boot") version "2.4.2"
@@ -8,7 +9,7 @@ plugins {
 }
 
 group = "com.marks0mmers"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
@@ -32,6 +33,8 @@ dependencies {
 	testImplementation("io.projectreactor", "reactor-test")
 	testImplementation("org.springframework.security", "spring-security-test")
 }
+
+tasks.withType<BootJar>()
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {

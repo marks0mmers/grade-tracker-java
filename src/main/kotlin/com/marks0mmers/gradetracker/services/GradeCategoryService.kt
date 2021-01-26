@@ -4,7 +4,7 @@ import com.marks0mmers.gradetracker.models.dto.GradeCategoryDto
 import com.marks0mmers.gradetracker.models.persistent.Grade
 import com.marks0mmers.gradetracker.models.persistent.GradeCategory
 import com.marks0mmers.gradetracker.models.vm.GradeCategorySubmissionVM
-import com.marks0mmers.gradetracker.models.vm.UpdateGradeCategoryVM
+import com.marks0mmers.gradetracker.models.vm.GradeCategoryUpdateVM
 import com.marks0mmers.gradetracker.repositories.CourseRepository
 import com.marks0mmers.gradetracker.repositories.GradeCategoryRepository
 import com.marks0mmers.gradetracker.util.panic
@@ -14,7 +14,6 @@ import kotlinx.coroutines.reactive.awaitFirst
 import kotlinx.coroutines.reactive.awaitFirstOrElse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 
 @Service
 class GradeCategoryService {
@@ -54,7 +53,7 @@ class GradeCategoryService {
             .calculateGrades()
     }
 
-    suspend fun update(gc: UpdateGradeCategoryVM): GradeCategoryDto {
+    suspend fun update(gc: GradeCategoryUpdateVM): GradeCategoryDto {
         return gc.id?.let { gradeCategoryId ->
             return gradeCategoryRepository
                 .save(GradeCategory(

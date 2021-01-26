@@ -1,7 +1,7 @@
 package com.marks0mmers.gradetracker.controllers
 
 import com.marks0mmers.gradetracker.models.vm.GradeCategorySubmissionVM
-import com.marks0mmers.gradetracker.models.vm.UpdateGradeCategoryVM
+import com.marks0mmers.gradetracker.models.vm.GradeCategoryUpdateVM
 import com.marks0mmers.gradetracker.services.GradeCategoryService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -49,7 +49,7 @@ class GradeCategoryController {
 
             PUT("/gradeCategories/{gradeCategoryId}") { req ->
                 val gradeCategoryId = req.pathVariable("gradeCategoryId")
-                val gradeCategory = req.awaitBody<UpdateGradeCategoryVM>()
+                val gradeCategory = req.awaitBody<GradeCategoryUpdateVM>()
                 gradeCategory.id = gradeCategoryId
                 val updatedCategory = gradeCategoryService.update(gradeCategory)
                 ok().json()
