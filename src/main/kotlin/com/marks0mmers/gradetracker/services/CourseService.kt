@@ -1,46 +1,70 @@
 package com.marks0mmers.gradetracker.services
 
-import com.marks0mmers.gradetracker.dto.CourseDto
-import com.marks0mmers.gradetracker.persistent.Course
+import com.marks0mmers.gradetracker.models.dto.CourseDto
+import com.marks0mmers.gradetracker.models.persistent.Course
 import com.marks0mmers.gradetracker.repositories.CourseRepository
+import com.marks0mmers.gradetracker.util.panic
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.reactive.asFlow
+import kotlinx.coroutines.reactive.awaitFirst
+import kotlinx.coroutines.reactive.awaitFirstOrElse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 
 @Service
-class CourseService @Autowired constructor(
-        private val courseRepository: CourseRepository,
-        private val userService: UserService
-) {
-    fun getCoursesByUser(username: String) = courseRepository
-            .findAll()
-            .filterWhen { c -> userService.findByUsername(username).map { it.id == c.userId } }
-            .map { CourseDto(it) }
+class CourseService {
 
-    fun getCourseById(courseId: String) = courseRepository
-            .findById(courseId)
-            .map { CourseDto(it) }
+    @Autowired
+    private lateinit var courseRepository: CourseRepository
+    @Autowired
+    private lateinit var userService: UserService
 
-    fun createCourse(username: String, course: CourseDto) = userService
-            .findByUsername(username)
-            .flatMap {
-                    courseRepository
-                            .save(Course(course, it.id ?: ""))
-                            .map { c -> CourseDto(c) }
-            }
-
-    fun updateCourse(courseId: String, course: CourseDto) = courseRepository
-            .findById(courseId)
-            .flatMap {
-                courseRepository.save(Course(it.id, course.title, course.description, course.section, course.creditHours, it.userId))
+    fun getCoursesByUser(username: String): Flow<CourseDto> {
+        return courseRepository.findAll().asFlow()
+            .transform { c ->
+                if (userService.findByUsername(username).id == c.userId) {
+                    emit(c)
+                }
             }
             .map { CourseDto(it) }
+    }
 
-    fun deleteCourse(courseId: String) = courseRepository
+    suspend fun getCourseById(courseId: String): CourseDto {
+        return courseRepository
             .findById(courseId)
-            .flatMap {
-                courseRepository.delete(it)
-                Mono.just(it)
-            }
-            .map { CourseDto(it) }
+            .awaitFirstOrElse { panic("Cannot find course with ID: $courseId") }
+            .let { CourseDto(it) }
+    }
+
+    suspend fun createCourse(username: String, course: CourseDto): CourseDto {
+        val user = userService.findByUsername(username)
+        return courseRepository
+            .save(Course(course, user.id ?: panic("User doesn't have ID")))
+            .awaitFirst()
+            .let { CourseDto(it) }
+    }
+
+    suspend fun updateCourse(courseId: String, courseDto: CourseDto): CourseDto {
+        val course = getCourseById(courseId)
+        return courseRepository
+            .save(
+                Course(
+                    course.id,
+                    courseDto.title,
+                    courseDto.description,
+                    courseDto.section,
+                    courseDto.creditHours,
+                    course.userId ?: ""
+                )
+            )
+            .awaitFirst()
+            .let { CourseDto(it) }
+    }
+
+    suspend fun deleteCourse(courseId: String): CourseDto {
+        courseRepository.deleteById(courseId).awaitFirst()
+        return getCourseById(courseId)
+    }
 }

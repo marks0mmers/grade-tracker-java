@@ -1,46 +1,60 @@
 package com.marks0mmers.gradetracker.controllers
 
-import com.marks0mmers.gradetracker.dto.CourseDto
-import com.marks0mmers.gradetracker.persistent.Course
-import com.marks0mmers.gradetracker.repositories.CourseRepository
+import com.marks0mmers.gradetracker.models.dto.CourseDto
 import com.marks0mmers.gradetracker.services.CourseService
-import com.marks0mmers.gradetracker.services.UserService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpStatus.*
 import org.springframework.web.bind.annotation.*
-import reactor.core.publisher.Mono
-import java.security.Principal
+import org.springframework.web.reactive.function.server.*
+import org.springframework.web.reactive.function.server.ServerResponse.*
 
-@RestController
-@RequestMapping("/api/courses")
-class CourseController @Autowired constructor(
-    private val courseService: CourseService
-) {
+@Configuration
+class CourseController {
 
-    @GetMapping
-    fun getCoursesCurrentUser(p: Principal) = courseService
-            .getCoursesByUser(p.name)
+    @Autowired
+    private lateinit var courseService: CourseService
 
-    @GetMapping("{id}")
-    fun getCourseById(@PathVariable("id") courseId: String) = courseService
-            .getCourseById(courseId)
-            .map { ResponseEntity.ok(it) }
-            .defaultIfEmpty( ResponseEntity.notFound().build() )
+    @Bean
+    fun coursesRouter() = coRouter {
+        "/api/v2".nest {
+            GET("/courses") { req ->
+                val p = req.awaitPrincipal() ?: return@GET status(UNAUTHORIZED).buildAndAwait()
+                val courses = courseService.getCoursesByUser(p.name)
+                ok().json()
+                    .bodyAndAwait(courses)
+            }
 
-    @PostMapping
-    fun createCourse(p: Principal, @RequestBody course: CourseDto) = courseService
-            .createCourse(p.name, course)
+            GET("/courses/{id}") { req ->
+                val courseId = req.pathVariable("id")
+                val course = courseService.getCourseById(courseId)
+                ok().json()
+                    .bodyValueAndAwait(course)
+            }
 
-    @PutMapping("{id}")
-    fun updateCourse(@PathVariable("id") courseId: String, @RequestBody course: CourseDto) = courseService
-            .updateCourse(courseId, course)
-            .map { ResponseEntity.ok(it) }
-            .defaultIfEmpty( ResponseEntity.notFound().build() )
+            POST("/courses") { req ->
+                val p = req.awaitPrincipal() ?: return@POST status(UNAUTHORIZED).buildAndAwait()
+                val course = req.awaitBody<CourseDto>()
+                val createdCourse = courseService.createCourse(p.name, course)
+                ok().json()
+                    .bodyValueAndAwait(createdCourse)
+            }
 
-    @DeleteMapping("{id}")
-    fun deleteCourse(@PathVariable("id") courseId: String) = courseService
-            .deleteCourse(courseId)
-            .map { ResponseEntity.ok(it) }
-            .defaultIfEmpty( ResponseEntity.notFound().build() )
+            PUT("/courses/{id}") { req ->
+                val courseId = req.pathVariable("id")
+                val course = req.awaitBody<CourseDto>()
+                val updatedCourse = courseService.updateCourse(courseId, course)
+                ok().json()
+                    .bodyValueAndAwait(updatedCourse)
+            }
+
+            DELETE("/courses/{id}") { req ->
+                val courseId = req.pathVariable("id")
+                val deletedCourse = courseService.deleteCourse(courseId)
+                ok().json()
+                    .bodyValueAndAwait(deletedCourse)
+            }
+        }
+    }
 }

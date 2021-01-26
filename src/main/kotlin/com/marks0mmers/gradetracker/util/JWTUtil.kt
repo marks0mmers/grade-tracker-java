@@ -1,6 +1,6 @@
 package com.marks0mmers.gradetracker.util
 
-import com.marks0mmers.gradetracker.persistent.User
+import com.marks0mmers.gradetracker.models.persistent.User
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -18,11 +18,14 @@ class JWTUtil : Serializable {
     @Value("\${springbootwebfluxjjwt.jjwt.expiration}")
     private val expirationTime: String? = null
 
-    fun getAllClaimsFromToken(token: String): Claims = Jwts
+    fun getAllClaimsFromToken(token: String): Claims {
+        val encodedString = Base64.getEncoder().encodeToString(secret?.toByteArray())
+        return Jwts
             .parser()
-            .setSigningKey(Base64.getEncoder().encodeToString(secret?.toByteArray()))
+            .setSigningKey(encodedString)
             .parseClaimsJws(token)
             .body
+    }
 
     fun getUsernameFromToken(token: String): String = getAllClaimsFromToken(token).subject
 
@@ -42,12 +45,12 @@ class JWTUtil : Serializable {
         val createdDate = Date()
         val expirationDate = Date(createdDate.time + expirationTimeLong * 1000)
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(username)
-                .setIssuedAt(createdDate)
-                .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.HS512, Base64.getEncoder().encodeToString(secret?.toByteArray()))
-                .compact()
+            .setClaims(claims)
+            .setSubject(username)
+            .setIssuedAt(createdDate)
+            .setExpiration(expirationDate)
+            .signWith(SignatureAlgorithm.HS512, Base64.getEncoder().encodeToString(secret?.toByteArray()))
+            .compact()
     }
 
     fun validateToken(token: String) = !isTokenExpired(token)

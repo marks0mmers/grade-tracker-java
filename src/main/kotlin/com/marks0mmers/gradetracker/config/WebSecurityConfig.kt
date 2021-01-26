@@ -8,16 +8,18 @@ import org.springframework.http.HttpStatus
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
+import org.springframework.security.web.server.SecurityWebFilterChain
 import reactor.core.publisher.Mono
 
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 class WebSecurityConfig @Autowired constructor(
-        val authenticationManger: AuthenticationManger,
-        val securityContextRepository: SecurityContextRepository
+    val authenticationManger: AuthenticationManager,
+    val securityContextRepository: SecurityContextRepository
 ) {
     @Bean
-    fun securityWebFilterChain(http: ServerHttpSecurity) = http
+    fun securityWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
+        return http
             .exceptionHandling()
             .authenticationEntryPoint { swe, _ -> Mono.fromRunnable { swe.response.statusCode = HttpStatus.UNAUTHORIZED } }
             .accessDeniedHandler { swe, _ -> Mono.fromRunnable { swe.response.statusCode = HttpStatus.FORBIDDEN } }
@@ -29,7 +31,8 @@ class WebSecurityConfig @Autowired constructor(
             .securityContextRepository(securityContextRepository)
             .authorizeExchange()
             .pathMatchers(HttpMethod.OPTIONS).permitAll()
-            .pathMatchers(HttpMethod.POST, "/api/users", "/api/users/login").permitAll()
+            .pathMatchers(HttpMethod.POST, "/api/v2/users", "/api/v2/users/login").permitAll()
             .anyExchange().authenticated()
             .and().build()
+    }
 }

@@ -1,6 +1,6 @@
 package com.marks0mmers.gradetracker.repositories
 
-import com.marks0mmers.gradetracker.config.AuthenticationManger
+import com.marks0mmers.gradetracker.config.AuthenticationManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -13,9 +13,11 @@ import reactor.core.publisher.Mono
 import java.lang.UnsupportedOperationException
 
 @Component
-class SecurityContextRepository @Autowired constructor(
-        val authenticationManager: AuthenticationManger
-) : ServerSecurityContextRepository {
+class SecurityContextRepository : ServerSecurityContextRepository {
+
+    @Autowired
+    private lateinit var authenticationManager: AuthenticationManager
+
     override fun save(p0: ServerWebExchange?, p1: SecurityContext?): Mono<Void> {
         throw UnsupportedOperationException("Not Supported Yet.")
     }
@@ -27,8 +29,8 @@ class SecurityContextRepository @Autowired constructor(
             val authToken = authHeader.substring(7)
             val auth = UsernamePasswordAuthenticationToken(authToken, authToken)
             authenticationManager
-                    .authenticate(auth)
-                    .map { SecurityContextImpl(it) }
+                .authenticate(auth)
+                .map { SecurityContextImpl(it) }
         } else {
             Mono.empty()
         }
