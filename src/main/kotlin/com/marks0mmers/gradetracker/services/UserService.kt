@@ -1,6 +1,6 @@
 package com.marks0mmers.gradetracker.services
 
-import com.marks0mmers.gradetracker.config.PBKDF2Encoder
+import com.marks0mmers.gradetracker.config.PasswordEncoder
 import com.marks0mmers.gradetracker.models.constants.Role
 import com.marks0mmers.gradetracker.models.dto.UserDto
 import com.marks0mmers.gradetracker.models.persistent.User
@@ -19,7 +19,7 @@ class UserService {
     private lateinit var userRepository: UserRepository
 
     @Autowired
-    private lateinit var passwordEncoder: PBKDF2Encoder
+    private lateinit var passwordEncoder: PasswordEncoder
 
     suspend fun login(username: String, password: String): User {
         val user = userRepository

@@ -1,5 +1,6 @@
 package com.marks0mmers.gradetracker.util
 
+import com.marks0mmers.gradetracker.models.dto.UserDto
 import com.marks0mmers.gradetracker.models.persistent.User
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
@@ -34,6 +35,12 @@ class JWTUtil : Serializable {
     fun isTokenExpired(token: String) = getExpirationDateFromToken(token).before(Date())
 
     fun generateToken(user: User): String {
+        val claims = HashMap<String, Any>()
+        claims["role"] = user.roles
+        return doGenerateToken(claims, user.username)
+    }
+
+    fun generateToken(user: UserDto): String {
         val claims = HashMap<String, Any>()
         claims["role"] = user.roles
         return doGenerateToken(claims, user.username)

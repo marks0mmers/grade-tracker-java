@@ -2,6 +2,11 @@ spring:
   data:
     mongodb:
       database: grade-tracker-java
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
 springbootwebfluxjjwt:
   password:
     encoder:
@@ -11,3 +16,11 @@ springbootwebfluxjjwt:
   jjwt:
     secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize
     expiration: 28800
+---
+spring:
+  config:
+    activate:
+      on-profile: logger
+logging:
+  level:
+    root: INFO

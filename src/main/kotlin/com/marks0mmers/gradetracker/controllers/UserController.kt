@@ -9,10 +9,9 @@ import com.marks0mmers.gradetracker.util.JWTUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.reactive.function.server.awaitBody
-import org.springframework.web.reactive.function.server.bodyValueAndAwait
-import org.springframework.web.reactive.function.server.coRouter
-import org.springframework.web.reactive.function.server.json
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.UNAUTHORIZED
+import org.springframework.web.reactive.function.server.*
 
 @Configuration
 class UserController {
@@ -39,6 +38,13 @@ class UserController {
                     .bodyValueAndAwait(createdUser)
             }
 
+            GET("/users/current") { req ->
+                val p = req.awaitPrincipal() ?: return@GET status(UNAUTHORIZED).buildAndAwait()
+                val user = userService.findByUsername(p.name)
+                ok().json()
+                    .bodyValueAndAwait(addToken(user))
+            }
+
             GET("/users/{id}") { req ->
                 val userId = req.pathVariable("id")
                 val user = userService.getUserById(userId)
@@ -46,6 +52,11 @@ class UserController {
                     .bodyValueAndAwait(user)
             }
         }
+    }
+
+    private fun addToken(user: UserDto): UserDto {
+        user.token = jwtUtil.generateToken(user)
+        return user
     }
 
     private fun addToken(user: User): UserDto {
