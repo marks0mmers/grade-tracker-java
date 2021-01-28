@@ -6,21 +6,20 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
 import java.io.Serializable
 import java.util.*
 import kotlin.collections.HashMap
 
 @Component
+@ConfigurationProperties(prefix = "springbootwebfluxjjwt.jjwt")
 class JWTUtil : Serializable {
-    @Value("\${springbootwebfluxjjwt.jjwt.secret}")
-    private val secret: String? = null
-
-    @Value("\${springbootwebfluxjjwt.jjwt.expiration}")
-    private val expirationTime: String? = null
+    var secret: String = ""
+    var expirationTime: Long = 0
 
     fun getAllClaimsFromToken(token: String): Claims {
-        val encodedString = Base64.getEncoder().encodeToString(secret?.toByteArray())
+        val encodedString = Base64.getEncoder().encodeToString(secret.toByteArray())
         return Jwts
             .parser()
             .setSigningKey(encodedString)
@@ -48,15 +47,14 @@ class JWTUtil : Serializable {
 
     @Suppress("DEPRECATION")
     private fun doGenerateToken(claims: Map<String, Any>, username: String): String {
-        val expirationTimeLong = expirationTime?.toLongOrNull() ?: 0
         val createdDate = Date()
-        val expirationDate = Date(createdDate.time + expirationTimeLong * 1000)
+        val expirationDate = Date(createdDate.time + expirationTime * 1000)
         return Jwts.builder()
             .setClaims(claims)
             .setSubject(username)
             .setIssuedAt(createdDate)
             .setExpiration(expirationDate)
-            .signWith(SignatureAlgorithm.HS512, Base64.getEncoder().encodeToString(secret?.toByteArray()))
+            .signWith(SignatureAlgorithm.HS512, Base64.getEncoder().encodeToString(secret.toByteArray()))
             .compact()
     }
 

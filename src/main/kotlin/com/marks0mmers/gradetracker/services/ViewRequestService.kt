@@ -21,29 +21,28 @@ class ViewRequestService {
 
     suspend fun getAllForRequester(requesterUsername: String): Flow<ViewRequestDto> {
         val user = userService.findByUsername(requesterUsername)
-        return viewRequestRepository.findByRequester(user.id!!).asFlow()
+        return viewRequestRepository.findByRequester(user.id).asFlow()
             .map { ViewRequestDto(it) }
     }
 
     suspend fun getAllForReceiver(receiverUsername: String): Flow<ViewRequestDto> {
         val user = userService.findByUsername(receiverUsername)
-        return viewRequestRepository.findByReceiver(user.id!!).asFlow()
+        return viewRequestRepository.findByReceiver(user.id).asFlow()
             .map { ViewRequestDto(it) }
     }
 
-    suspend fun checkIfRequestExists(requesterId: String, receiverId: String): ViewRequestDto {
-        val allForRequester = getAllForRequester(requesterId)
-        val req = allForRequester.filter { vr -> vr.receiver == receiverId }
-        req.onEmpty { panic("View Request with Requester ID: $requesterId & Receiver ID: $receiverId doesn't exist") }
-        return req.first()
-    }
+//    suspend fun checkIfRequestExists(requesterId: String, receiverId: String): ViewRequestDto {
+//        val allForRequester = getAllForRequester(requesterId)
+//        val req = allForRequester.filter { vr -> vr.receiver == receiverId }
+//        req.onEmpty { panic("View Request with Requester ID: $requesterId & Receiver ID: $receiverId doesn't exist") }
+//        return req.first()
+//    }
 
     suspend fun sendUserViewRequest(currentUsername: String, userToRequest: String): ViewRequestDto {
         val currentUser = userService.findByUsername(currentUsername)
         val newRequest = ViewRequest(
-            null,
             ViewRequestStatus.SENT.ordinal,
-            currentUser.id!!,
+            currentUser.id,
             userToRequest
         )
 

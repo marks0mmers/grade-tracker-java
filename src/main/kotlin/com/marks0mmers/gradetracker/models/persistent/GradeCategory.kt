@@ -1,7 +1,6 @@
 package com.marks0mmers.gradetracker.models.persistent
 
 import com.marks0mmers.gradetracker.models.dto.GradeCategoryDto
-import com.marks0mmers.gradetracker.models.dto.GradeDto
 import com.marks0mmers.gradetracker.models.vm.GradeCategorySubmissionVM
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.DBRef
@@ -12,8 +11,6 @@ import javax.validation.constraints.Positive
 
 @Document
 data class GradeCategory(
-    @Id
-    val id: String?,
 
     @NotNull
     val title: String,
@@ -30,8 +27,10 @@ data class GradeCategory(
     @DBRef
     val grades: List<Grade>
 ) {
+    @Id
+    var id: String? = null
+
     constructor(gc: GradeCategorySubmissionVM, courseId: String) : this(
-        null,
         gc.title,
         gc.percentage,
         gc.numberOfGrades,
@@ -39,23 +38,13 @@ data class GradeCategory(
         emptyList()
     )
 
-    fun calculateGrades(): GradeCategoryDto {
-        val totalOfCurrentGrades = grades.map { it.grade }.sum()
-        val remainingGrades = numberOfGrades - grades.size
-        val currentAverage = if (grades.isNotEmpty()) totalOfCurrentGrades / grades.size else totalOfCurrentGrades / 1
-        val potentialAverage = (totalOfCurrentGrades + 100 * remainingGrades) / numberOfGrades
-        val guarenteedAverage = totalOfCurrentGrades / numberOfGrades
-        return GradeCategoryDto(
-            id,
-            title,
-            percentage,
-            numberOfGrades,
-            remainingGrades,
-            courseId,
-            currentAverage,
-            potentialAverage,
-            guarenteedAverage,
-            grades.map { GradeDto(it) }
-        )
+    constructor(gc: GradeCategoryDto) : this(
+        gc.title,
+        gc.percentage,
+        gc.numberOfGrades,
+        gc.courseId,
+        gc.grades.map { Grade(it) }
+    ) {
+        this.id = gc.id
     }
 }

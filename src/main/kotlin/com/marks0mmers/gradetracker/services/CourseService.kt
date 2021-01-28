@@ -2,6 +2,7 @@ package com.marks0mmers.gradetracker.services
 
 import com.marks0mmers.gradetracker.models.dto.CourseDto
 import com.marks0mmers.gradetracker.models.persistent.Course
+import com.marks0mmers.gradetracker.models.vm.CourseSubmissionVM
 import com.marks0mmers.gradetracker.repositories.CourseRepository
 import com.marks0mmers.gradetracker.util.panic
 import kotlinx.coroutines.flow.Flow
@@ -38,27 +39,23 @@ class CourseService {
             .let { CourseDto(it) }
     }
 
-    suspend fun createCourse(username: String, course: CourseDto): CourseDto {
+    suspend fun createCourse(username: String, course: CourseSubmissionVM): CourseDto {
         val user = userService.findByUsername(username)
         return courseRepository
-            .save(Course(course, user.id ?: panic("User doesn't have ID")))
+            .save(Course(course, user.id))
             .awaitFirst()
             .let { CourseDto(it) }
     }
 
-    suspend fun updateCourse(courseId: String, courseDto: CourseDto): CourseDto {
+    suspend fun updateCourse(courseId: String, courseDto: CourseSubmissionVM): CourseDto {
         val course = getCourseById(courseId)
         return courseRepository
-            .save(
-                Course(
-                    course.id,
-                    courseDto.title,
-                    courseDto.description,
-                    courseDto.section,
-                    courseDto.creditHours,
-                    course.userId ?: ""
-                )
-            )
+            .save(Course(course.copy(
+                title = courseDto.title,
+                description = courseDto.description,
+                section = courseDto.section,
+                creditHours = courseDto.creditHours
+            )))
             .awaitFirst()
             .let { CourseDto(it) }
     }

@@ -1,6 +1,6 @@
 package com.marks0mmers.gradetracker.controllers
 
-import com.marks0mmers.gradetracker.models.dto.CourseDto
+import com.marks0mmers.gradetracker.models.vm.CourseSubmissionVM
 import com.marks0mmers.gradetracker.services.CourseService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -35,7 +35,7 @@ class CourseController {
 
             POST("/courses") { req ->
                 val p = req.awaitPrincipal() ?: return@POST status(UNAUTHORIZED).buildAndAwait()
-                val course = req.awaitBody<CourseDto>()
+                val course = req.awaitBody<CourseSubmissionVM>()
                 val createdCourse = courseService.createCourse(p.name, course)
                 ok().json()
                     .bodyValueAndAwait(createdCourse)
@@ -43,7 +43,7 @@ class CourseController {
 
             PUT("/courses/{id}") { req ->
                 val courseId = req.pathVariable("id")
-                val course = req.awaitBody<CourseDto>()
+                val course = req.awaitBody<CourseSubmissionVM>()
                 val updatedCourse = courseService.updateCourse(courseId, course)
                 ok().json()
                     .bodyValueAndAwait(updatedCourse)

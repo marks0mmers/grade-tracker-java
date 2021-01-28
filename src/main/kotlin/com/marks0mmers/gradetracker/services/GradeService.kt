@@ -28,17 +28,20 @@ class GradeService {
         return GradeDto(grade)
     }
 
-    suspend fun newGrade(grade: GradeDto): GradeDto {
-        val createdGrade = gradeRepository.save(Grade(grade)).awaitFirstOrElse { panic("Unable to save new grade") }
+    suspend fun newGrade(gradeCategoryId: String, gradeSubmission: GradeSubmissionVM): GradeDto {
+        val createdGrade = gradeRepository.save(Grade(gradeSubmission, gradeCategoryId)).awaitFirstOrElse { panic("Unable to save new grade") }
         return GradeDto(createdGrade)
     }
 
-    suspend fun updateGrade(gradeId: String, grade: GradeSubmissionVM): GradeDto {
-        val gradeToUpdate = gradeRepository.findById(gradeId).awaitFirstOrElse { panic("Cannot find grade by ID: $gradeId") }
-        gradeToUpdate.name = grade.name
-        gradeToUpdate.grade = grade.grade
-        gradeRepository.save(gradeToUpdate).awaitFirstOrElse { panic("Unable to update grade") }
-        return GradeDto(gradeToUpdate)
+    suspend fun updateGrade(gradeId: String, grade: GradeDto): GradeDto {
+        val gradeToUpdate = getGrade(gradeId)
+        val updatedGrade = gradeRepository
+            .save(Grade(gradeToUpdate.copy(
+                name = grade.name,
+                grade = grade.grade
+            )))
+            .awaitFirstOrElse { panic("Unable to update grade") }
+        return GradeDto(updatedGrade)
     }
 
     suspend fun deleteGrade(gradeId: String): GradeDto {

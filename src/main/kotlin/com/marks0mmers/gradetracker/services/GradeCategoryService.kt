@@ -1,10 +1,8 @@
 package com.marks0mmers.gradetracker.services
 
 import com.marks0mmers.gradetracker.models.dto.GradeCategoryDto
-import com.marks0mmers.gradetracker.models.persistent.Grade
 import com.marks0mmers.gradetracker.models.persistent.GradeCategory
 import com.marks0mmers.gradetracker.models.vm.GradeCategorySubmissionVM
-import com.marks0mmers.gradetracker.models.vm.GradeCategoryUpdateVM
 import com.marks0mmers.gradetracker.repositories.CourseRepository
 import com.marks0mmers.gradetracker.repositories.GradeCategoryRepository
 import com.marks0mmers.gradetracker.util.panic
@@ -27,7 +25,7 @@ class GradeCategoryService {
     fun getGradeCategoriesByCourse(courseId: String): Flow<GradeCategoryDto> {
         return gradeCategoryRepository.findAll().asFlow()
             .filter { it.courseId == courseId }
-            .map { it.calculateGrades() }
+            .map { GradeCategoryDto(it) }
     }
 
     suspend fun getAllForUser(username: String): Flow<GradeCategoryDto> {
@@ -40,33 +38,29 @@ class GradeCategoryService {
     }
 
     suspend fun getById(id: String): GradeCategoryDto {
-        return gradeCategoryRepository
+        val gradeCategory = gradeCategoryRepository
             .findById(id)
             .awaitFirstOrElse { panic("Cannot find grade category with id: $id") }
-            .calculateGrades()
+        return GradeCategoryDto(gradeCategory)
     }
 
     suspend fun create(gc: GradeCategorySubmissionVM, courseId: String): GradeCategoryDto {
-        return gradeCategoryRepository
+        val created = gradeCategoryRepository
             .save(GradeCategory(gc, courseId))
             .awaitFirst()
-            .calculateGrades()
+        return GradeCategoryDto(created)
     }
 
-    suspend fun update(gc: GradeCategoryUpdateVM): GradeCategoryDto {
-        return gc.id?.let { gradeCategoryId ->
-            return gradeCategoryRepository
-                .save(GradeCategory(
-                    gradeCategoryId,
-                    gc.title,
-                    gc.percentage,
-                    gc.numberOfGrades,
-                    gc.courseId,
-                    gc.grades.map { g -> Grade(g) }
-                ))
-                .awaitFirst()
-                .calculateGrades()
-        } ?: panic("Grade Category ID not set")
+    suspend fun update(gc: GradeCategoryDto, gradeCategoryId: String): GradeCategoryDto {
+        val gradeCategory = getById(gradeCategoryId)
+        val updated = gradeCategoryRepository
+            .save(GradeCategory(gradeCategory.copy(
+                title = gc.title,
+                percentage = gc.percentage,
+                numberOfGrades = gc.numberOfGrades
+            )))
+            .awaitFirst()
+        return GradeCategoryDto(updated)
     }
 
     suspend fun delete(id: String): GradeCategoryDto {

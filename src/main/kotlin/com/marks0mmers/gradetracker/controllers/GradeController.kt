@@ -34,19 +34,14 @@ class GradeController {
             POST("/gradeCategory/{gradeCategoryId}") { req ->
                 val gradeCategoryId = req.pathVariable("gradeCategoryId")
                 val gradeSubmission = req.awaitBody<GradeSubmissionVM>()
-                val createdGrade = gradeService.newGrade(GradeDto(
-                        null,
-                        gradeSubmission.name,
-                        gradeSubmission.grade,
-                        gradeCategoryId
-                ))
+                val createdGrade = gradeService.newGrade(gradeCategoryId, gradeSubmission)
                 ok().json()
                     .bodyValueAndAwait(createdGrade)
             }
 
             PUT("/{gradeId}") { req ->
                 val gradeId = req.pathVariable("gradeId")
-                val gradeUpdate = req.awaitBody<GradeSubmissionVM>()
+                val gradeUpdate = req.awaitBody<GradeDto>()
                 val updatedGrade = gradeService.updateGrade(gradeId, gradeUpdate)
                 ok().json()
                     .bodyValueAndAwait(updatedGrade)
