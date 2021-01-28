@@ -34,7 +34,9 @@ dependencies {
 	testImplementation("org.springframework.security", "spring-security-test")
 }
 
-tasks.withType<BootJar>()
+tasks.withType<BootJar> {
+	archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
+}
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
