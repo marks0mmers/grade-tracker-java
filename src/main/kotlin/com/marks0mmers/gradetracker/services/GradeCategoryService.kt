@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirst
 import kotlinx.coroutines.reactive.awaitFirstOrElse
+import kotlinx.coroutines.reactive.awaitFirstOrNull
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -82,7 +83,7 @@ class GradeCategoryService {
     }
 
     suspend fun delete(id: String): GradeCategoryDto {
-        gradeCategoryRepository.deleteById(id).awaitFirst()
+        gradeCategoryRepository.deleteById(id).awaitFirstOrNull()
         return getById(id)
     }
 

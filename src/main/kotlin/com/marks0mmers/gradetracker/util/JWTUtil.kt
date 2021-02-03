@@ -16,7 +16,7 @@ import kotlin.collections.HashMap
 @ConfigurationProperties(prefix = "springbootwebfluxjjwt.jjwt")
 class JWTUtil : Serializable {
     var secret: String = ""
-    var expirationTime: Long = 0
+    var expiration: Long = 0
 
     fun getAllClaimsFromToken(token: String): Claims {
         val encodedString = Base64.getEncoder().encodeToString(secret.toByteArray())
@@ -48,7 +48,7 @@ class JWTUtil : Serializable {
     @Suppress("DEPRECATION")
     private fun doGenerateToken(claims: Map<String, Any>, username: String): String {
         val createdDate = Date()
-        val expirationDate = Date(createdDate.time + expirationTime * 1000)
+        val expirationDate = Date(createdDate.time + expiration * 1000)
         return Jwts.builder()
             .setClaims(claims)
             .setSubject(username)

@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirstOrElse
+import kotlinx.coroutines.reactive.awaitFirstOrNull
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -67,7 +68,7 @@ class GradeService {
         val grade = gradeRepository
             .findById(gradeId)
             .awaitFirstOrElse { panic("Cannot find grade by ID: $gradeId") }
-        gradeRepository.deleteById(gradeId)
+        gradeRepository.deleteById(gradeId).awaitFirstOrNull()
 
         val gc = gradeCategoryService.getById(grade.gradeCategoryId)
         courseAverageTrackingService.addTrackingAverageOnChange(gc.courseId)
