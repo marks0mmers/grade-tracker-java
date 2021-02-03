@@ -23,7 +23,9 @@ class CourseService {
     private lateinit var userService: UserService
 
     fun getCoursesByUser(username: String): Flow<CourseDto> {
-        return courseRepository.findAll().asFlow()
+        return courseRepository
+            .findAll()
+            .asFlow()
             .transform { c ->
                 if (userService.findByUsername(username).id == c.userId) {
                     emit(c)
@@ -42,7 +44,7 @@ class CourseService {
     suspend fun createCourse(username: String, course: CourseSubmissionVM): CourseDto {
         val user = userService.findByUsername(username)
         return courseRepository
-            .save(Course(course, user.id))
+            .insert(Course(course, user.id))
             .awaitFirst()
             .let { CourseDto(it) }
     }

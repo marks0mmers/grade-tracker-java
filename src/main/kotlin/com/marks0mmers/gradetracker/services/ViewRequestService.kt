@@ -21,13 +21,17 @@ class ViewRequestService {
 
     suspend fun getAllForRequester(requesterUsername: String): Flow<ViewRequestDto> {
         val user = userService.findByUsername(requesterUsername)
-        return viewRequestRepository.findByRequester(user.id).asFlow()
+        return viewRequestRepository
+            .findByRequester(user.id)
+            .asFlow()
             .map { ViewRequestDto(it) }
     }
 
     suspend fun getAllForReceiver(receiverUsername: String): Flow<ViewRequestDto> {
         val user = userService.findByUsername(receiverUsername)
-        return viewRequestRepository.findByReceiver(user.id).asFlow()
+        return viewRequestRepository
+            .findByReceiver(user.id)
+            .asFlow()
             .map { ViewRequestDto(it) }
     }
 

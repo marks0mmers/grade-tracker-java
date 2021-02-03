@@ -37,7 +37,7 @@ class UserService {
 
     suspend fun createUser(user: CreateUserVM): UserDto {
         return userRepository
-            .save(
+            .insert(
                 User(
                     username = user.username,
                     password = passwordEncoder.encode(user.password),

@@ -7,6 +7,7 @@ import com.marks0mmers.gradetracker.repositories.GradeRepository
 import com.marks0mmers.gradetracker.util.panic
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirstOrElse
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,19 +18,33 @@ class GradeService {
 
     @Autowired
     private lateinit var gradeRepository: GradeRepository
+    @Autowired
+    private lateinit var gradeCategoryService: GradeCategoryService
+    @Autowired
+    private lateinit var courseAverageTrackingService: CourseAverageTrackingService
 
     fun getGradesFromCategory(gradeCategoryId: String): Flow<GradeDto> {
-        return gradeRepository.findByGradeCategoryId(gradeCategoryId).asFlow()
+        return gradeRepository
+            .findByGradeCategoryId(gradeCategoryId)
+            .asFlow()
             .map { GradeDto(it) }
     }
 
     suspend fun getGrade(gradeId: String): GradeDto {
-        val grade = gradeRepository.findById(gradeId).awaitFirstOrElse { panic("Cannot find grade by ID: $gradeId") }
+        val grade = gradeRepository
+            .findById(gradeId)
+            .awaitFirstOrElse { panic("Cannot find grade by ID: $gradeId") }
         return GradeDto(grade)
     }
 
     suspend fun newGrade(gradeCategoryId: String, gradeSubmission: GradeSubmissionVM): GradeDto {
-        val createdGrade = gradeRepository.save(Grade(gradeSubmission, gradeCategoryId)).awaitFirstOrElse { panic("Unable to save new grade") }
+        val createdGrade = gradeRepository
+            .insert(Grade(gradeSubmission, gradeCategoryId))
+            .awaitFirstOrElse { panic("Unable to save new grade") }
+
+        val gc = gradeCategoryService.getById(gradeCategoryId)
+        courseAverageTrackingService.addTrackingAverageOnChange(gc.courseId)
+
         return GradeDto(createdGrade)
     }
 
@@ -41,12 +56,22 @@ class GradeService {
                 grade = grade.grade
             )))
             .awaitFirstOrElse { panic("Unable to update grade") }
+
+        val gc = gradeCategoryService.getById(updatedGrade.gradeCategoryId)
+        courseAverageTrackingService.addTrackingAverageOnChange(gc.courseId)
+
         return GradeDto(updatedGrade)
     }
 
     suspend fun deleteGrade(gradeId: String): GradeDto {
-        val grade = gradeRepository.findById(gradeId).awaitFirstOrElse { panic("Cannot find grade by ID: $gradeId") }
+        val grade = gradeRepository
+            .findById(gradeId)
+            .awaitFirstOrElse { panic("Cannot find grade by ID: $gradeId") }
         gradeRepository.deleteById(gradeId)
+
+        val gc = gradeCategoryService.getById(grade.gradeCategoryId)
+        courseAverageTrackingService.addTrackingAverageOnChange(gc.courseId)
+
         return GradeDto(grade)
     }
 }

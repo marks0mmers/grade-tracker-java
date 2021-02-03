@@ -21,16 +21,22 @@ class GradeCategoryService {
     private lateinit var courseRepository: CourseRepository
     @Autowired
     private lateinit var userService: UserService
+    @Autowired
+    private lateinit var courseAverageTrackingService: CourseAverageTrackingService
 
     fun getGradeCategoriesByCourse(courseId: String): Flow<GradeCategoryDto> {
-        return gradeCategoryRepository.findAll().asFlow()
+        return gradeCategoryRepository
+            .findAll()
+            .asFlow()
             .filter { it.courseId == courseId }
             .map { GradeCategoryDto(it) }
     }
 
     suspend fun getAllForUser(username: String): Flow<GradeCategoryDto> {
         val user = userService.findByUsername(username)
-        return courseRepository.findAll().asFlow()
+        return courseRepository
+            .findAll()
+            .asFlow()
             .filter { it.userId == user.id && it.id != null }
             .transform { course ->
                 emitAll(getGradeCategoriesByCourse(course.id!!))
@@ -46,8 +52,14 @@ class GradeCategoryService {
 
     suspend fun create(gc: GradeCategorySubmissionVM, courseId: String): GradeCategoryDto {
         val created = gradeCategoryRepository
-            .save(GradeCategory(gc, courseId))
+            .insert(GradeCategory(gc, courseId))
             .awaitFirst()
+
+        val totalPercentage = getGradeCategoriesByCourse(courseId).map { it.percentage }.reduce { acc, p -> acc + p }
+        if (totalPercentage == 100.0) {
+            courseAverageTrackingService.addTrackingAverageOnChange(courseId)
+        }
+
         return GradeCategoryDto(created)
     }
 
@@ -60,6 +72,12 @@ class GradeCategoryService {
                 numberOfGrades = gc.numberOfGrades
             )))
             .awaitFirst()
+
+        val totalPercentage = getGradeCategoriesByCourse(gc.courseId).map { it.percentage }.reduce { acc, p -> acc + p }
+        if (totalPercentage == 100.0) {
+            courseAverageTrackingService.addTrackingAverageOnChange(gc.courseId)
+        }
+
         return GradeCategoryDto(updated)
     }
 
