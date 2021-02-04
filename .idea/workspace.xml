@@ -10,36 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b1c22f5b-2932-40ee-8ea5-90307161425f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/AuthenticationManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/AuthenticationManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/CORSFilter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/CORSFilter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/GlobalErrorHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/GlobalErrorHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/RequestLoggingFilter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/RequestLoggingFilter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/CourseAverageTrackingController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/CourseAverageTrackingController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/CourseController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/CourseController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/GradeCategoryController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/GradeCategoryController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/GradeController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/GradeController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/UserController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/ViewRequestController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/ViewRequestController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/CourseAverageTrackingDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/CourseAverageTrackingDto.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/GradeCategoryDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/GradeCategoryDto.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/GradeDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/GradeDto.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/Course.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/Course.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/CourseAverageTracking.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/CourseAverageTracking.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/Grade.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/Grade.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/GradeCategory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/GradeCategory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/ViewRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/ViewRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/vm/GradeSubmissionVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/vm/GradeSubmissionVM.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/repositories/SecurityContextRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/repositories/SecurityContextRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/CourseAverageTrackingService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/CourseAverageTrackingService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/CourseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/CourseService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/GradeCategoryService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/GradeCategoryService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/GradeService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/GradeService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/UserService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/ViewRequestService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/ViewRequestService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/util/JWTUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/util/JWTUtil.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/com/marks0mmers/gradetracker/controllers/CourseControllerTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/com/marks0mmers/gradetracker/controllers/CourseControllerTests.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611664623601</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixed Formatting and Updated Versions">
+      <created>1612404861572</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1612404861572</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -217,6 +195,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Changed to Gradle / Coroutine API" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed to Gradle / Coroutine API" />
+    <MESSAGE value="Fixed Formatting and Updated Versions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Formatting and Updated Versions" />
   </component>
 </project>
