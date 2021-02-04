@@ -15,10 +15,8 @@ import org.springframework.web.reactive.function.server.*
 @Configuration
 class UserController {
 
-    @Autowired
-    private lateinit var userService: UserService
-    @Autowired
-    private lateinit var jwtUtil: JWTUtil
+    @Autowired private lateinit var userService: UserService
+    @Autowired private lateinit var jwtUtil: JWTUtil
 
     @Bean
     fun userRouter() = coRouter {

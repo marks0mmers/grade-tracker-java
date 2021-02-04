@@ -5,7 +5,8 @@ import com.marks0mmers.gradetracker.models.dto.ViewRequestDto
 import com.marks0mmers.gradetracker.models.persistent.ViewRequest
 import com.marks0mmers.gradetracker.repositories.ViewRequestRepository
 import com.marks0mmers.gradetracker.util.panic
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirstOrElse
 import org.springframework.beans.factory.annotation.Autowired
