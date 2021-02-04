@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand />
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b1c22f5b-2932-40ee-8ea5-90307161425f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/AuthenticationManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/AuthenticationManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/CORSFilter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/CORSFilter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/GlobalErrorHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/GlobalErrorHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/RequestLoggingFilter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/config/RequestLoggingFilter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/CourseAverageTrackingController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/CourseAverageTrackingController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/CourseController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/CourseController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/GradeCategoryController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/GradeCategoryController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/GradeController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/GradeController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/UserController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/ViewRequestController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/controllers/ViewRequestController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/CourseAverageTrackingDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/CourseAverageTrackingDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/GradeCategoryDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/GradeCategoryDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/GradeDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/dto/GradeDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/Course.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/Course.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/CourseAverageTracking.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/CourseAverageTracking.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/Grade.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/Grade.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/GradeCategory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/GradeCategory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/User.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/ViewRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/persistent/ViewRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/vm/GradeSubmissionVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/models/vm/GradeSubmissionVM.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/repositories/SecurityContextRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/repositories/SecurityContextRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/CourseAverageTrackingService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/CourseAverageTrackingService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/CourseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/CourseService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/GradeCategoryService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/GradeCategoryService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/GradeService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/GradeService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/UserService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/ViewRequestService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/services/ViewRequestService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/util/JWTUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/marks0mmers/gradetracker/util/JWTUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/com/marks0mmers/gradetracker/controllers/CourseControllerTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/com/marks0mmers/gradetracker/controllers/CourseControllerTests.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="gradetracker" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="gradetracker" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/marks0mmers/grade-tracker-kotlin" />
+      </set>
+    </option>
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="sw1uaiw3" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
+  <component name="ProjectId" id="1nORSw1YEEpGeVl8GievQVnT7OW" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle.kts" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2376951" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Kotlin" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="GradeTrackerApplicationKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="gradetracker.main" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.marks0mmers.gradetracker.GradeTrackerApplicationKt" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GradeTrackerApplicationKt" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b1c22f5b-2932-40ee-8ea5-90307161425f" name="Default Changelist" comment="" />
+      <created>1611259156004</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611259156004</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Changed to Gradle / Coroutine API">
+      <created>1611664623601</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1611664623601</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/Users/MarkSommers/Development/Kotlin/grade-tracker-kotlin/src/test" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Changed to Gradle / Coroutine API" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed to Gradle / Coroutine API" />
+  </component>
+</project>

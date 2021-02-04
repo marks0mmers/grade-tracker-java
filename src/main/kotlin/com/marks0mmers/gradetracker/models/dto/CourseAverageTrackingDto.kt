@@ -6,17 +6,11 @@ import java.time.Instant
 
 data class CourseAverageTrackingDto(
     val id: String,
-
     val dateTracked: Instant,
-
     val currentAverage: Double,
-
     val potentialAverage: Double,
-
     val guarenteedAverage: Double,
-
     val percentComplete: Double,
-
     val courseId: String
 ) {
     constructor(c: CourseAverageTracking) : this(

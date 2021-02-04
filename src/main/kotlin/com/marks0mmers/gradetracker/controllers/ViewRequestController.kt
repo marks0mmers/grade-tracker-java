@@ -12,8 +12,7 @@ import org.springframework.web.reactive.function.server.ServerResponse.*
 @Configuration
 class ViewRequestController {
 
-    @Autowired
-    private lateinit var viewRequestService: ViewRequestService
+    @Autowired private lateinit var viewRequestService: ViewRequestService
 
     @Bean
     fun viewRequestRouter() = coRouter {

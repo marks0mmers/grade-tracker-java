@@ -1,15 +1,14 @@
 package com.marks0mmers.gradetracker.controllers
 
-import com.marks0mmers.gradetracker.models.vm.AuthRequestVM
-import com.marks0mmers.gradetracker.models.vm.CreateUserVM
 import com.marks0mmers.gradetracker.models.dto.UserDto
 import com.marks0mmers.gradetracker.models.persistent.User
+import com.marks0mmers.gradetracker.models.vm.AuthRequestVM
+import com.marks0mmers.gradetracker.models.vm.CreateUserVM
 import com.marks0mmers.gradetracker.services.UserService
 import com.marks0mmers.gradetracker.util.JWTUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.UNAUTHORIZED
 import org.springframework.web.reactive.function.server.*
 

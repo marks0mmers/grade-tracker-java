@@ -1,10 +1,10 @@
 package com.marks0mmers.gradetracker.models.dto
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.marks0mmers.gradetracker.models.persistent.GradeCategory
 import com.marks0mmers.gradetracker.util.panic
 
-@JsonIgnoreProperties("decimalPercentage")
 data class GradeCategoryDto(
     val id: String,
     val title: String,
@@ -13,7 +13,6 @@ data class GradeCategoryDto(
     val courseId: String,
     val grades: List<GradeDto>
 ) {
-
     constructor(gc: GradeCategory) : this(
         gc.id ?: panic("GradeCategory id is null"),
         gc.title,
@@ -26,9 +25,11 @@ data class GradeCategoryDto(
     private val totalOfCurrentGrades: Double
         get() = grades.map { it.grade }.sum()
 
+    @get:JsonIgnore
     val decimalPercentage: Double
         get() = percentage - 100
 
+    @get:JsonInclude
     val remainingGrades: Int
         get() = numberOfGrades - grades.size
 

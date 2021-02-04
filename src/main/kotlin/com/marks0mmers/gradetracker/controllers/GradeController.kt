@@ -11,8 +11,7 @@ import org.springframework.web.reactive.function.server.*
 @Configuration
 class GradeController {
 
-    @Autowired
-    private lateinit var gradeService: GradeService
+    @Autowired private lateinit var gradeService: GradeService
 
     @Bean
     fun gradeRouter() = coRouter {

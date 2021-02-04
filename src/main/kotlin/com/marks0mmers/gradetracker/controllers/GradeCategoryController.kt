@@ -12,8 +12,7 @@ import org.springframework.web.reactive.function.server.*
 @Configuration
 class GradeCategoryController {
 
-    @Autowired
-    private lateinit var gradeCategoryService: GradeCategoryService
+    @Autowired private lateinit var gradeCategoryService: GradeCategoryService
 
     @Bean
     fun gradeCategoryRouter() = coRouter {

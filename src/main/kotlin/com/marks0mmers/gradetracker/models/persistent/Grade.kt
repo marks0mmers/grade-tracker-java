@@ -10,17 +10,12 @@ import javax.validation.constraints.PositiveOrZero
 
 @Document
 data class Grade(
-    @NotNull
-    var name: String,
-
+    @NotNull var name: String,
     @PositiveOrZero @Max(100)
     var grade: Double,
-
-    @NotNull
-    val gradeCategoryId: String
+    @NotNull val gradeCategoryId: String
 ) {
-    @Id
-    var id: String? = null
+    @Id var id: String? = null
 
     constructor(g: GradeSubmissionVM, gradeCategoryId: String) : this(
         g.name,

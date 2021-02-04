@@ -16,14 +16,10 @@ import org.springframework.stereotype.Service
 
 @Service
 class GradeCategoryService {
-    @Autowired
-    private lateinit var gradeCategoryRepository: GradeCategoryRepository
-    @Autowired
-    private lateinit var courseRepository: CourseRepository
-    @Autowired
-    private lateinit var userService: UserService
-    @Autowired
-    private lateinit var courseAverageTrackingService: CourseAverageTrackingService
+    @Autowired private lateinit var gradeCategoryRepository: GradeCategoryRepository
+    @Autowired private lateinit var courseRepository: CourseRepository
+    @Autowired private lateinit var userService: UserService
+    @Autowired private lateinit var courseAverageTrackingService: CourseAverageTrackingService
 
     fun getGradeCategoriesByCourse(courseId: String): Flow<GradeCategoryDto> {
         return gradeCategoryRepository

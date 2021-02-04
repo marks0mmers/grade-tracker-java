@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
 import org.junit.jupiter.api.extension.ExtendWith
-import org.junit.jupiter.api.fail
 import org.mockito.Mockito.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
@@ -36,14 +35,10 @@ import reactor.kotlin.core.publisher.toMono
 @WithMockUser(username = "marks0mmers", roles = ["USER"])
 @TestInstance(PER_CLASS)
 class CourseControllerTests {
-    @MockBean
-    lateinit var userRepository: UserRepository
 
-    @MockBean
-    lateinit var courseRepository: CourseRepository
-
-    @Autowired
-    lateinit var webClient: WebTestClient
+    @MockBean lateinit var userRepository: UserRepository
+    @MockBean lateinit var courseRepository: CourseRepository
+    @Autowired lateinit var webClient: WebTestClient
 
     private val user = User(
         "marks0mmers",
@@ -98,12 +93,14 @@ class CourseControllerTests {
         webClient.post()
             .uri("/api/v2/courses")
             .contentType(APPLICATION_JSON)
-            .bodyValue(CourseSubmissionVM(
-                course.title,
-                course.description,
-                course.section,
-                course.creditHours
-            ))
+            .bodyValue(
+                CourseSubmissionVM(
+                    course.title,
+                    course.description,
+                    course.section,
+                    course.creditHours
+                )
+            )
             .exchange()
             .expectStatus().isOk
             .expectBody(CourseDto::class.java)
@@ -114,17 +111,20 @@ class CourseControllerTests {
     @Test
     fun testUpdateCourse() {
         `when`(courseRepository.findById(anyString())).thenReturn(course.toMono())
-        `when`(courseRepository.save(any())).thenReturn(course.copy(title = "CSC 316 Edit").also { it.id = course.id }.toMono())
+        `when`(courseRepository.save(any())).thenReturn(course.copy(title = "CSC 316 Edit").also { it.id = course.id }
+            .toMono())
 
         webClient.put()
             .uri("/api/v2/courses/${course.id}")
             .contentType(APPLICATION_JSON)
-            .bodyValue(CourseSubmissionVM(
-                course.title + " Edit",
-                course.description,
-                course.section,
-                course.creditHours
-            ))
+            .bodyValue(
+                CourseSubmissionVM(
+                    course.title + " Edit",
+                    course.description,
+                    course.section,
+                    course.creditHours
+                )
+            )
             .exchange()
             .expectStatus().isOk
             .expectBody(CourseDto::class.java)

@@ -15,11 +15,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService {
-    @Autowired
-    private lateinit var userRepository: UserRepository
 
-    @Autowired
-    private lateinit var passwordEncoder: PasswordEncoder
+    @Autowired private lateinit var userRepository: UserRepository
+    @Autowired private lateinit var passwordEncoder: PasswordEncoder
 
     suspend fun login(username: String, password: String): User {
         val user = userRepository

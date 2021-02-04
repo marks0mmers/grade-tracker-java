@@ -18,10 +18,8 @@ import org.springframework.stereotype.Service
 @Service
 class CourseService {
 
-    @Autowired
-    private lateinit var courseRepository: CourseRepository
-    @Autowired
-    private lateinit var userService: UserService
+    @Autowired private lateinit var courseRepository: CourseRepository
+    @Autowired private lateinit var userService: UserService
 
     fun getCoursesByUser(username: String): Flow<CourseDto> {
         return courseRepository

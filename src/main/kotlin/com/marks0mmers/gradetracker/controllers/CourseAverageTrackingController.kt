@@ -11,8 +11,7 @@ import org.springframework.web.reactive.function.server.json
 @Configuration
 class CourseAverageTrackingController {
 
-    @Autowired
-    private lateinit var courseAverageTrackingService: CourseAverageTrackingService
+    @Autowired private lateinit var courseAverageTrackingService: CourseAverageTrackingService
 
     @Bean
     fun courseAverageTrackingRouter() = coRouter {

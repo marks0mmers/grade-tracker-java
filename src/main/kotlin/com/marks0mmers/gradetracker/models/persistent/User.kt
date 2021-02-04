@@ -15,8 +15,7 @@ data class User(
     var enabled: Boolean,
     var roles: List<Role>
 ) : UserDetails {
-    @Id
-    var id: String? = null
+    @Id var id: String? = null
     override fun isEnabled() = enabled
     override fun getUsername() = username
     override fun isCredentialsNonExpired() = false

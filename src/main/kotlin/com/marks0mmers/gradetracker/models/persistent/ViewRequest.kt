@@ -7,15 +7,10 @@ import javax.validation.constraints.NotBlank
 
 @Document
 data class ViewRequest (
-    @NotBlank
-    @Range(min = 0, max = 2)
+    @NotBlank @Range(min = 0, max = 2)
     var status: Int,
-
-    @NotBlank
-    val requester: String,
-
-    @NotBlank
-    val receiver: String
+    @NotBlank val requester: String,
+    @NotBlank val receiver: String
 ) {
     @Id
     val id: String? = null

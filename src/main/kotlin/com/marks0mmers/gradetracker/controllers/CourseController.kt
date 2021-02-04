@@ -13,8 +13,7 @@ import org.springframework.web.reactive.function.server.ServerResponse.*
 @Configuration
 class CourseController {
 
-    @Autowired
-    private lateinit var courseService: CourseService
+    @Autowired private lateinit var courseService: CourseService
 
     @Bean
     fun coursesRouter() = coRouter {

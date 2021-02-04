@@ -14,10 +14,8 @@ import org.springframework.stereotype.Service
 @Service
 class ViewRequestService {
 
-    @Autowired
-    private lateinit var viewRequestRepository: ViewRequestRepository
-    @Autowired
-    private lateinit var userService: UserService
+    @Autowired private lateinit var viewRequestRepository: ViewRequestRepository
+    @Autowired private lateinit var userService: UserService
 
     suspend fun getAllForRequester(requesterUsername: String): Flow<ViewRequestDto> {
         val user = userService.findByUsername(requesterUsername)

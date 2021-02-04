@@ -10,22 +10,14 @@ import javax.validation.constraints.Positive
 
 @Document
 data class Course(
-    @NotBlank
-    val title: String,
-
-    @NotBlank
-    val description: String,
-
-    @Positive
-    val section: Int,
-
+    @NotBlank val title: String,
+    @NotBlank val description: String,
+    @Positive val section: Int,
     @Positive @Max(4)
     val creditHours: Int,
-
     val userId: String
 ) {
-    @Id
-    var id: String? = null
+    @Id var id: String? = null
 
     constructor(course: CourseSubmissionVM, userId: String) : this(
         course.title,

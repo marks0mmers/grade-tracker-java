@@ -11,24 +11,14 @@ import javax.validation.constraints.Positive
 
 @Document
 data class GradeCategory(
-
-    @NotNull
-    val title: String,
-
+    @NotNull val title: String,
     @Positive @Max(100)
     val percentage: Double,
-
-    @Positive
-    val numberOfGrades: Int,
-
-    @NotNull
-    val courseId: String,
-
-    @DBRef
-    val grades: List<Grade>
+    @Positive val numberOfGrades: Int,
+    @NotNull val courseId: String,
+    @DBRef val grades: List<Grade>
 ) {
-    @Id
-    var id: String? = null
+    @Id var id: String? = null
 
     constructor(gc: GradeCategorySubmissionVM, courseId: String) : this(
         gc.title,

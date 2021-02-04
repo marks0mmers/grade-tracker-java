@@ -16,11 +16,8 @@ import java.time.Instant
 @Service
 class CourseAverageTrackingService {
 
-    @Autowired
-    private lateinit var courseAverageTrackingRepository: CourseAverageTrackingRepository
-
-    @Autowired
-    private lateinit var gradeCategoryService: GradeCategoryService
+    @Autowired private lateinit var courseAverageTrackingRepository: CourseAverageTrackingRepository
+    @Autowired private lateinit var gradeCategoryService: GradeCategoryService
 
     fun getAllByCourse(courseId: String): Flow<CourseAverageTrackingDto> {
         return courseAverageTrackingRepository

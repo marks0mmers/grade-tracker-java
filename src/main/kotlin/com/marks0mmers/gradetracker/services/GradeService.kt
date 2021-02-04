@@ -7,7 +7,6 @@ import com.marks0mmers.gradetracker.repositories.GradeRepository
 import com.marks0mmers.gradetracker.util.panic
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirstOrElse
 import kotlinx.coroutines.reactive.awaitFirstOrNull
@@ -17,12 +16,9 @@ import org.springframework.stereotype.Service
 @Service
 class GradeService {
 
-    @Autowired
-    private lateinit var gradeRepository: GradeRepository
-    @Autowired
-    private lateinit var gradeCategoryService: GradeCategoryService
-    @Autowired
-    private lateinit var courseAverageTrackingService: CourseAverageTrackingService
+    @Autowired private lateinit var gradeRepository: GradeRepository
+    @Autowired private lateinit var gradeCategoryService: GradeCategoryService
+    @Autowired private lateinit var courseAverageTrackingService: CourseAverageTrackingService
 
     fun getGradesFromCategory(gradeCategoryId: String): Flow<GradeDto> {
         return gradeRepository

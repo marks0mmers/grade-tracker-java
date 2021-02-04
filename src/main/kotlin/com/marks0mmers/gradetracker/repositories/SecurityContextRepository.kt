@@ -14,8 +14,7 @@ import reactor.core.publisher.Mono
 @Component
 class SecurityContextRepository : ServerSecurityContextRepository {
 
-    @Autowired
-    private lateinit var authenticationManager: AuthenticationManager
+    @Autowired private lateinit var authenticationManager: AuthenticationManager
 
     override fun save(p0: ServerWebExchange?, p1: SecurityContext?): Mono<Void> {
         return Mono.empty()

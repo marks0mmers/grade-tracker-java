@@ -2,16 +2,17 @@ package com.marks0mmers.gradetracker.config
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.marks0mmers.gradetracker.util.GradeTrackerException
+import io.jsonwebtoken.JwtException
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
-import org.springframework.http.HttpStatus.*
-import org.springframework.http.MediaType.*
-import org.springframework.web.server.ServerWebExchange
-import reactor.core.publisher.Mono
-import io.jsonwebtoken.JwtException
+import org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR
+import org.springframework.http.HttpStatus.UNAUTHORIZED
+import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.web.server.ResponseStatusException
+import org.springframework.web.server.ServerWebExchange
 import org.springframework.web.server.ServerWebInputException
+import reactor.core.publisher.Mono
 
 @Configuration
 @Order(-2)
