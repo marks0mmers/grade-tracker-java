@@ -3,7 +3,6 @@ package com.marks0mmers.gradetracker.services
 import com.marks0mmers.gradetracker.models.dto.GradeCategoryDto
 import com.marks0mmers.gradetracker.models.persistent.GradeCategory
 import com.marks0mmers.gradetracker.models.vm.GradeCategorySubmissionVM
-import com.marks0mmers.gradetracker.repositories.CourseRepository
 import com.marks0mmers.gradetracker.repositories.GradeCategoryRepository
 import com.marks0mmers.gradetracker.util.panic
 import kotlinx.coroutines.flow.*
@@ -17,8 +16,7 @@ import org.springframework.stereotype.Service
 @Service
 class GradeCategoryService {
     @Autowired private lateinit var gradeCategoryRepository: GradeCategoryRepository
-    @Autowired private lateinit var courseRepository: CourseRepository
-    @Autowired private lateinit var userService: UserService
+    @Autowired private lateinit var courseService: CourseService
     @Autowired private lateinit var courseAverageTrackingService: CourseAverageTrackingService
 
     fun getGradeCategoriesByCourse(courseId: String): Flow<GradeCategoryDto> {
@@ -30,13 +28,10 @@ class GradeCategoryService {
     }
 
     suspend fun getAllForUser(username: String): Flow<GradeCategoryDto> {
-        val user = userService.findByUsername(username)
-        return courseRepository
-            .findAll()
-            .asFlow()
-            .filter { it.userId == user.id && it.id != null }
+        return courseService
+            .getCoursesByUser(username)
             .transform { course ->
-                emitAll(getGradeCategoriesByCourse(course.id!!))
+                emitAll(getGradeCategoriesByCourse(course.id))
             }
     }
 
