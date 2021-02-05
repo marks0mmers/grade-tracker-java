@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      database: grade-tracker-java
+      uri: mongodb://localhost:27017/grade-tracker-java
 ---
 spring:
   config:
