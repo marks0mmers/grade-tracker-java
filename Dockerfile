@@ -3,7 +3,7 @@ ENV APP_HOME=/usr/app
 WORKDIR $APP_HOME
 
 COPY . .
-RUN gradle clean build
+RUN gradle clean assemble
 
 FROM adoptopenjdk/openjdk11:alpine-jre
 ENV ARTIFACT_NAME=gradetracker.jar
