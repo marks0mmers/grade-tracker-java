@@ -3,6 +3,7 @@ package com.marks0mmers.gradetracker.controllers
 import com.marks0mmers.gradetracker.models.dto.GradeCategoryDto
 import com.marks0mmers.gradetracker.models.vm.GradeCategorySubmissionVM
 import com.marks0mmers.gradetracker.services.GradeCategoryService
+import kotlinx.coroutines.FlowPreview
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,6 +15,7 @@ class GradeCategoryController {
 
     @Autowired private lateinit var gradeCategoryService: GradeCategoryService
 
+    @FlowPreview
     @Bean
     fun gradeCategoryRouter() = coRouter {
         "/api/v2".nest {

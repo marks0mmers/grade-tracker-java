@@ -6,6 +6,7 @@ import com.marks0mmers.gradetracker.models.vm.CourseSubmissionVM
 import com.marks0mmers.gradetracker.repositories.CourseRepository
 import com.marks0mmers.gradetracker.util.panic
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.reactive.asFlow
@@ -25,11 +26,7 @@ class CourseService {
         return courseRepository
             .findAll()
             .asFlow()
-            .transform { c ->
-                if (userService.findByUsername(username).id == c.userId) {
-                    emit(c)
-                }
-            }
+            .filter { c -> userService.findByUsername(username).id == c.userId }
             .map { CourseDto(it) }
     }
 

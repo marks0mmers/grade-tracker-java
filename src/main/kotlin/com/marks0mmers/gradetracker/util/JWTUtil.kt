@@ -8,29 +8,40 @@ import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
 import java.io.Serializable
+import java.time.Instant
 import java.util.*
 import kotlin.collections.HashMap
 
 @Component
-@ConfigurationProperties(prefix = "springbootwebfluxjjwt.jjwt")
+@ConfigurationProperties(prefix = "json-web-token.jjwt")
 class JWTUtil : Serializable {
     var secret: String = ""
     var expiration: Long = 0
 
-    fun getAllClaimsFromToken(token: String): Claims {
+    fun getAllClaimsFromToken(token: String): Claims? {
         val encodedString = Base64.getEncoder().encodeToString(secret.toByteArray())
-        return Jwts
-            .parser()
-            .setSigningKey(encodedString)
-            .parseClaimsJws(token)
-            .body
+        return try {
+            Jwts
+                .parser()
+                .setSigningKey(encodedString)
+                .parseClaimsJws(token)
+                .body
+        } catch (e: Exception) {
+            null
+        }
     }
 
-    fun getUsernameFromToken(token: String): String = getAllClaimsFromToken(token).subject
+    fun getUsernameFromToken(token: String): String? {
+        return getAllClaimsFromToken(token)?.subject
+    }
 
-    fun getExpirationDateFromToken(token: String): Date = getAllClaimsFromToken(token).expiration
+    fun getExpirationDateFromToken(token: String): Instant? {
+        return getAllClaimsFromToken(token)?.expiration?.toInstant()
+    }
 
-    fun isTokenExpired(token: String) = getExpirationDateFromToken(token).before(Date())
+    fun isTokenExpired(token: String): Boolean {
+        return getExpirationDateFromToken(token)?.isBefore(Instant.now()) ?: true
+    }
 
     fun generateToken(user: User): String {
         val claims = HashMap<String, Any>()
@@ -44,7 +55,6 @@ class JWTUtil : Serializable {
         return doGenerateToken(claims, user.username)
     }
 
-    @Suppress("DEPRECATION")
     private fun doGenerateToken(claims: Map<String, Any>, username: String): String {
         val createdDate = Date()
         val expirationDate = Date(createdDate.time + expiration * 1000)
@@ -57,5 +67,7 @@ class JWTUtil : Serializable {
             .compact()
     }
 
-    fun validateToken(token: String) = !isTokenExpired(token)
+    fun validateToken(token: String): Boolean {
+        return !isTokenExpired(token)
+    }
 }
