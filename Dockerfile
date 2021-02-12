@@ -12,4 +12,4 @@ WORKDIR $APP_HOME
 COPY --from=build $APP_HOME/build/libs/gradetracker.jar .
 
 EXPOSE 8080
-ENTRYPOINT exec java -jar gradetracker.jar
+CMD java -jar gradetracker.jar
