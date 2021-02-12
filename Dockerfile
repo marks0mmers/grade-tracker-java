@@ -6,11 +6,10 @@ COPY . .
 RUN gradle clean assemble
 
 FROM adoptopenjdk/openjdk11:alpine-jre
-ENV ARTIFACT_NAME=gradetracker.jar
 ENV APP_HOME=/usr/app
 
 WORKDIR $APP_HOME
-COPY --from=build $APP_HOME/build/libs/$ARTIFACT_NAME .
+COPY --from=build $APP_HOME/build/libs/gradetracker.jar .
 
 EXPOSE 8080
-ENTRYPOINT exec java -jar ${ARTIFACT_NAME}
+ENTRYPOINT exec java -jar gradetracker.jar
