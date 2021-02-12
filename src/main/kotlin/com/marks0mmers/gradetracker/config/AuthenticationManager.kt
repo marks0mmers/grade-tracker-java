@@ -17,18 +17,17 @@ class AuthenticationManager : ReactiveAuthenticationManager {
 
     override fun authenticate(authentication: Authentication?): Mono<Authentication> {
         val authToken = authentication?.credentials.toString()
-        val username = try {
-            jwtUtil.getUsernameFromToken(authToken)
-        } catch (e: Exception) {
-            return Mono.error(e)
-        }
+        val username = jwtUtil.getUsernameFromToken(authToken) ?: return Mono.empty()
         return if (jwtUtil.validateToken(authToken)) {
             val claims = jwtUtil.getAllClaimsFromToken(authToken)
-            val rolesMap = claims.get("role", List::class.java)
-            val roles = rolesMap.map { Role.valueOf(it.toString()) }
-            val auth =
-                UsernamePasswordAuthenticationToken(username, null, roles.map { SimpleGrantedAuthority(it.name) })
-            Mono.just(auth)
+            val rolesMap = claims?.get("role", List::class.java)
+            val roles = rolesMap?.map { Role.valueOf(it.toString()) }
+            Mono.just(
+                UsernamePasswordAuthenticationToken(
+                    username,
+                    null,
+                    roles?.map { SimpleGrantedAuthority(it.name) })
+            )
         } else {
             Mono.empty()
         }

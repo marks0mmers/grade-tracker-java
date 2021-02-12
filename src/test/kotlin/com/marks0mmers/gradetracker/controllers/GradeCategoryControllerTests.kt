@@ -3,6 +3,7 @@ package com.marks0mmers.gradetracker.controllers
 import com.marks0mmers.gradetracker.models.dto.GradeCategoryDto
 import com.marks0mmers.gradetracker.models.vm.GradeCategorySubmissionVM
 import com.marks0mmers.gradetracker.services.GradeCategoryService
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
@@ -42,6 +43,7 @@ class GradeCategoryControllerTests {
         webClient = webClient.mutateWith(SecurityMockServerConfigurers.csrf())
     }
 
+    @FlowPreview
     @Test
     fun testGetGradeCategoriesForUser(): Unit = runBlocking {
         `when`(gradeCategoryService.getAllForUser("marks0mmers")).thenReturn(flowOf(gradeCategory))

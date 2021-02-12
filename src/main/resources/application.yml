@@ -7,7 +7,7 @@ spring:
   config:
     activate:
       on-profile: dev
-springbootwebfluxjjwt:
+json-web-token:
   password:
     encoder:
       secret: mysecret

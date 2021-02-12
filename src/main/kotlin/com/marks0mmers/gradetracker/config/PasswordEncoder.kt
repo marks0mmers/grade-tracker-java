@@ -8,7 +8,7 @@ import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
 
 @Component
-@ConfigurationProperties(prefix = "springbootwebfluxjjwt.password.encoder")
+@ConfigurationProperties(prefix = "json-web-token.password.encoder")
 class PasswordEncoder : PasswordEncoder {
     var secret: String = ""
     var iteration: Int = 0

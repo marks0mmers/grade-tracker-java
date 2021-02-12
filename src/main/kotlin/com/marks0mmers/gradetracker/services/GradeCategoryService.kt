@@ -5,6 +5,7 @@ import com.marks0mmers.gradetracker.models.persistent.GradeCategory
 import com.marks0mmers.gradetracker.models.vm.GradeCategorySubmissionVM
 import com.marks0mmers.gradetracker.repositories.GradeCategoryRepository
 import com.marks0mmers.gradetracker.util.panic
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirst
@@ -27,12 +28,11 @@ class GradeCategoryService {
             .map { GradeCategoryDto(it) }
     }
 
+    @FlowPreview
     suspend fun getAllForUser(username: String): Flow<GradeCategoryDto> {
         return courseService
             .getCoursesByUser(username)
-            .transform { course ->
-                emitAll(getGradeCategoriesByCourse(course.id))
-            }
+            .flatMapConcat { course -> getGradeCategoriesByCourse(course.id) }
     }
 
     suspend fun getById(id: String): GradeCategoryDto {
