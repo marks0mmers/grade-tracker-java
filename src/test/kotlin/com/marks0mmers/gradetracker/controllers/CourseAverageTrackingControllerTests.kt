@@ -32,7 +32,7 @@ class CourseAverageTrackingControllerTests {
     }
 
     @Test
-    fun testGetCourseAverageTrackingByCourse() {
+    fun `test getting course average tracking by course`() {
         `when`(courseAverageTrackingService.getAllByCourse("CourseID")).thenReturn(flowOf(CourseAverageTrackingDto(
             "CourseAverageTrackingID",
             Instant.now(),

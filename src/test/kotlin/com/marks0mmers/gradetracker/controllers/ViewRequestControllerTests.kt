@@ -40,7 +40,7 @@ class ViewRequestControllerTests {
     }
 
     @Test
-    fun testGetViewRequestsForMeToRespond(): Unit = runBlocking {
+    fun `test getting view requests for user to respond`(): Unit = runBlocking {
         `when`(viewRequestService.getAllForReceiver(viewRequest.receiver)).thenReturn(flowOf(viewRequest))
 
         webClient.get()
@@ -51,7 +51,7 @@ class ViewRequestControllerTests {
     }
 
     @Test
-    fun testGetViewRequestsSent(): Unit = runBlocking {
+    fun `test getting view requests that user sent`(): Unit = runBlocking {
         `when`(viewRequestService.getAllForRequester(viewRequest.requester)).thenReturn(flowOf(viewRequest))
 
         webClient.get()
@@ -62,7 +62,7 @@ class ViewRequestControllerTests {
     }
 
     @Test
-    fun testSendUserViewRequest(): Unit = runBlocking {
+    fun `test sending view requests`(): Unit = runBlocking {
         `when`(viewRequestService.sendUserViewRequest(viewRequest.requester, viewRequest.receiver)).thenReturn(
             viewRequest
         )
@@ -77,7 +77,7 @@ class ViewRequestControllerTests {
     }
 
     @Test
-    fun testApproveViewRequest(): Unit = runBlocking {
+    fun `test approving view requests`(): Unit = runBlocking {
         `when`(
             viewRequestService.approveViewRequest(
                 viewRequest.id,
@@ -95,7 +95,7 @@ class ViewRequestControllerTests {
     }
 
     @Test
-    fun testDenyViewRequest(): Unit = runBlocking {
+    fun `test denying view requests`(): Unit = runBlocking {
         `when`(
             viewRequestService.denyViewRequest(
                 viewRequest.id,

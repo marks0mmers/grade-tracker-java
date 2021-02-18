@@ -56,7 +56,7 @@ class UserControllerTests {
     }
 
     @Test
-    fun testLogin(): Unit = runBlocking {
+    fun `test logging in`(): Unit = runBlocking {
         `when`(userService.login(user.username, "Truckin09")).thenReturn(user)
 
         webClient.post()
@@ -69,7 +69,7 @@ class UserControllerTests {
     }
 
     @Test
-    fun testCreateUser(): Unit = runBlocking {
+    fun `test creating user`(): Unit = runBlocking {
         val createUserVm = CreateUserVM(
             "marks0mmers",
             "Truckin09",
@@ -91,7 +91,7 @@ class UserControllerTests {
     }
 
     @Test
-    fun testGetCurrentUser(): Unit = runBlocking {
+    fun `test getting current user`(): Unit = runBlocking {
         `when`(userService.findByUsername(user.username)).thenReturn(userDto)
 
         webClient.get()
@@ -102,7 +102,7 @@ class UserControllerTests {
     }
 
     @Test
-    fun testGetUserById(): Unit = runBlocking {
+    fun `test getting user by id`(): Unit = runBlocking {
         `when`(userService.getUserById(userDto.id)).thenReturn(userDto)
 
         webClient.get()

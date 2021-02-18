@@ -43,7 +43,7 @@ class CourseControllerTests {
     }
 
     @Test
-    fun testGetAllCourses() {
+    fun `test getting all courses`() {
         val courses = listOf(course)
         `when`(courseService.getCoursesByUser(anyString())).thenReturn(courses.asFlow())
 
@@ -55,7 +55,7 @@ class CourseControllerTests {
     }
 
     @Test
-    fun testGetCourseById(): Unit = runBlocking {
+    fun `test getting course by id`(): Unit = runBlocking {
         `when`(courseService.getCourseById(anyString())).thenReturn(course)
 
         webClient.get()
@@ -66,7 +66,7 @@ class CourseControllerTests {
     }
 
     @Test
-    fun testCreateCourse(): Unit = runBlocking {
+    fun `test creating course`(): Unit = runBlocking {
         val courseSubmission = CourseSubmissionVM(
                 course.title,
                 course.description,
@@ -87,7 +87,7 @@ class CourseControllerTests {
     }
 
     @Test
-    fun testUpdateCourse(): Unit = runBlocking {
+    fun `test updating course`(): Unit = runBlocking {
         val courseEdit = CourseSubmissionVM(
             course.title + " Edit",
             course.description,
@@ -108,7 +108,7 @@ class CourseControllerTests {
     }
 
     @Test
-    fun testDeleteCourse(): Unit = runBlocking {
+    fun `test deleting course`(): Unit = runBlocking {
         `when`(courseService.deleteCourse(anyString())).thenReturn(course)
 
         webClient.delete()

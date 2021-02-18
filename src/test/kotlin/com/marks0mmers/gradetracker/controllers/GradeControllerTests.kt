@@ -41,7 +41,7 @@ class GradeControllerTests {
     }
 
     @Test
-    fun testGetGradesByGradeCategory() {
+    fun `test getting grades by grade category`() {
         `when`(gradeService.getGradesFromCategory(grade.gradeCategoryId)).thenReturn(flowOf(grade))
 
         webClient.get()
@@ -52,7 +52,7 @@ class GradeControllerTests {
     }
 
     @Test
-    fun testGetGradeById(): Unit = runBlocking {
+    fun `test getting grade by id`(): Unit = runBlocking {
         `when`(gradeService.getGrade(grade.id)).thenReturn(grade)
 
         webClient.get()
@@ -63,7 +63,7 @@ class GradeControllerTests {
     }
 
     @Test
-    fun testCreateGrade(): Unit = runBlocking {
+    fun `test creating grade`(): Unit = runBlocking {
         val gradeSubmission = GradeSubmissionVM(grade.name, grade.grade)
         `when`(gradeService.newGrade(grade.gradeCategoryId, gradeSubmission)).thenReturn(grade)
 
@@ -79,7 +79,7 @@ class GradeControllerTests {
     }
 
     @Test
-    fun testUpdateGrade(): Unit = runBlocking {
+    fun `test updating grade`(): Unit = runBlocking {
         val gradeEdit = grade.copy(name = "${grade.name} Edit")
         `when`(gradeService.updateGrade(grade.id, gradeEdit)).thenReturn(gradeEdit)
 
@@ -95,7 +95,7 @@ class GradeControllerTests {
     }
 
     @Test
-    fun testDeleteGrade(): Unit = runBlocking {
+    fun `test deleting grade`(): Unit = runBlocking {
         `when`(gradeService.deleteGrade(grade.id)).thenReturn(grade)
 
         webClient.delete()
